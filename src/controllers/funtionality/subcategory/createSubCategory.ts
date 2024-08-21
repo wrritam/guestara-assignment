@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import prisma from "../../db/db.config";
+import prisma from "../../../db/db.config";
 
 interface CustomRequest extends Request {
   user?: {
@@ -15,9 +15,10 @@ interface CustomRequest extends Request {
   };
 }
 
-export const createCategory = async (req: CustomRequest, res: Response) => {
-  const { name, image, description, taxApplicability, taxNumber, taxType } =
-    req.body;
+export const createSubCategory = async (req: CustomRequest, res: Response) => {
+  const { name, image, description, taxNumber } = req.body;
+  const categoryId = parseInt(req.params.categoryId);
+
   const user = await prisma.user.findUnique({
     where: {
       email: req.user?.email,
@@ -26,14 +27,18 @@ export const createCategory = async (req: CustomRequest, res: Response) => {
 
   if (user) {
     if (user.is_verified) {
-      const item = await prisma.category.create({
+      const item = await prisma.subCategory.create({
         data: {
           name,
           image,
           description,
-          taxApplicability,
+          taxApplicability: true,
           taxNumber,
-          taxType,
+          category: {
+            connect: {
+              id: categoryId,
+            },
+          },
           createdBy: {
             connect: {
               id: user.id,
@@ -42,7 +47,7 @@ export const createCategory = async (req: CustomRequest, res: Response) => {
         },
       });
 
-      res.json({ message: "Category created successfully", item });
+      res.json({ message: "SubCategory created successfully", item });
     } else {
       res.status(403).json({ message: "Please verify your email address" });
     }

@@ -33,11 +33,10 @@ model Category {
   name             String
   image            String
   description      String
-  taxApplicability Boolean
+  taxApplicability Boolean       @default(true)
   taxNumber        Int
   taxType          String?
-  createdById      Int
-  published        Boolean      @default(true)   
+  createdById      Int 
   subCategories    SubCategory[]
   items            Item[]
   createdAt        DateTime      @default(now())
@@ -50,9 +49,8 @@ model SubCategory {
   name             String
   image            String
   description      String
-  taxApplicability Boolean
-  taxNumber        Int
-  published        Boolean  @default(true)
+  taxApplicability Boolean  @default(true)
+  taxNumber        Int      
   category         Category @relation(fields: [categoryId], references: [id])
   categoryId       Int
   createdById      Int
@@ -61,6 +59,9 @@ model SubCategory {
   updatedAt        DateTime @updatedAt
   createdBy        User     @relation(fields: [createdById], references: [id])
 }
+
+
+
 
 model Item {
   id               Int          @id @default(autoincrement())
@@ -73,7 +74,6 @@ model Item {
   discount         Float
   totalAmount      Float
   addedById        Int
-  available        Boolean      @default(true)
   category         Category     @relation(fields: [categoryId], references: [id])
   categoryId       Int
   subCategory      SubCategory? @relation(fields: [subCategoryId], references: [id])

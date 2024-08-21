@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import prisma from "../../db/db.config";
+import prisma from "../../../db/db.config";
 
 interface CustomRequest extends Request {
   user?: {
@@ -15,7 +15,9 @@ interface CustomRequest extends Request {
   };
 }
 
-export const getAllCategories = async (req: CustomRequest, res: Response) => {
+export const getSubCategorybyId = async (req: CustomRequest, res: Response) => {
+  const subCategoryId = parseInt(req.params.subCategoryId);
+
   const user = await prisma.user.findUnique({
     where: {
       email: req.user?.email,
@@ -24,8 +26,17 @@ export const getAllCategories = async (req: CustomRequest, res: Response) => {
 
   if (user) {
     if (user.is_verified) {
-      const categories = await prisma.category.findMany();
-      res.json({ categories });
+      const subCategory = await prisma.subCategory.findUnique({
+        where: {
+          id: subCategoryId,
+        },
+      });
+
+      if (subCategory) {
+        res.json({ subCategory });
+      } else {
+        res.status(404).json({ message: "SubCategory not found" });
+      }
     } else {
       res.status(403).json({ message: "Please verify your email address" });
     }
