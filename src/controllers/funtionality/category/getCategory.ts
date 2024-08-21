@@ -33,3 +33,26 @@ export const getAllCategories = async (req: CustomRequest, res: Response) => {
     res.status(404).json({ message: "User not found" });
   }
 };
+
+export const getCategoryById = async (req: CustomRequest, res: Response) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      email: req.user?.email,
+    },
+  });
+
+  if (user) {
+    if (user.is_verified) {
+      const category = await prisma.category.findUnique({
+        where: {
+          id: Number(req.params.id),
+        },
+      });
+      res.json({ category });
+    } else {
+      res.status(403).json({ message: "Please verify your email address" });
+    }
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+};
