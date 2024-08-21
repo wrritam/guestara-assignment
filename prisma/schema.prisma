@@ -37,6 +37,7 @@ model Category {
   taxNumber        Int
   taxType          String?
   createdById      Int
+  published        Boolean      @default(true)   
   subCategories    SubCategory[]
   items            Item[]
   createdAt        DateTime      @default(now())
@@ -51,6 +52,7 @@ model SubCategory {
   description      String
   taxApplicability Boolean
   taxNumber        Int
+  published        Boolean  @default(true)
   category         Category @relation(fields: [categoryId], references: [id])
   categoryId       Int
   createdById      Int
@@ -71,6 +73,7 @@ model Item {
   discount         Float
   totalAmount      Float
   addedById        Int
+  available        Boolean      @default(true)
   category         Category     @relation(fields: [categoryId], references: [id])
   categoryId       Int
   subCategory      SubCategory? @relation(fields: [subCategoryId], references: [id])
