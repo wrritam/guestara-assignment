@@ -16,8 +16,12 @@ interface CustomRequest extends Request {
 }
 
 export const createSubCategory = async (req: CustomRequest, res: Response) => {
-  const { name, image, description, taxNumber } = req.body;
+  const { name, image, description } = req.body;
   const categoryId = parseInt(req.params.categoryId);
+
+  const category = await prisma.category.findUnique({
+    where: { id: categoryId },
+  });
 
   const user = await prisma.user.findUnique({
     where: {
@@ -29,11 +33,11 @@ export const createSubCategory = async (req: CustomRequest, res: Response) => {
     if (user.is_verified) {
       const item = await prisma.subCategory.create({
         data: {
-          name,
-          image,
-          description,
-          taxApplicability: true,
-          taxNumber,
+          name: name,
+          image: image,
+          description: description,
+          taxApplicability: category?.taxApplicability || false,
+          taxNumber: category?.taxNumber || 0,
           category: {
             connect: {
               id: categoryId,

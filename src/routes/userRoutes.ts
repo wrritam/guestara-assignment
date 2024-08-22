@@ -49,9 +49,17 @@ router.get("/get-all-categories", authentication, getAllCategories);
 router.get("/get-category/:id", authentication, getCategoryById);
 router.put("/edit-category/:id", authentication, editCategory);
 
-router.post("/create-subcategory", authentication, createSubCategory);
+router.post(
+  "/:categoryId/create-subcategory",
+  authentication,
+  createSubCategory
+);
 router.get("/get-all-subcategories", authentication, getAllSubCategories);
-router.get("/get-subcategory/:id", authentication, getSubCategorybyId);
+router.get(
+  "/get-subcategory/:subCategoryId",
+  authentication,
+  getSubCategorybyId
+);
 router.get(
   "/get-subcategory-under-category/:categoryId",
   authentication,

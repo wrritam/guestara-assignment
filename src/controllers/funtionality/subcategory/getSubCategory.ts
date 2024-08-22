@@ -71,26 +71,26 @@ export const getSubCategoryUnderCategory = async (
   req: CustomRequest,
   res: Response
 ) => {
-  const id = parseInt(req.params.id);
+  const categoryId = Number(req.params.categoryId);
 
   const user = await prisma.user.findUnique({
-    where: {
-      email: req.user?.email,
-    },
+    where: { email: req.user?.email },
   });
 
   if (user) {
     if (user.is_verified) {
       const subCategories = await prisma.subCategory.findMany({
         where: {
-          categoryId: id,
+          categoryId: {
+            equals: categoryId,
+          },
         },
       });
 
-      if (subCategories) {
+      if (subCategories.length > 0) {
         res.json({ subCategories });
       } else {
-        res.status(404).json({ message: "No subcategories here" });
+        res.status(404).json({ message: "No subcategories found" });
       }
     } else {
       res.status(403).json({ message: "Please verify your email address" });
