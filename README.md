@@ -49,11 +49,11 @@ Follow these steps to set up the project locally:
    hiddenKey
    password
 
-5. **Initialize the database:**
+5. **Prisma setup and migration:**
    Run the following Prisma commands to set up the database.
    ```bash
-   npx prisma migrate dev
    npx prisma generate
+   npx prisma migrate dev
    ```
 
 6. **Start the local Server:**
