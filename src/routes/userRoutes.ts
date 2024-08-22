@@ -68,11 +68,15 @@ router.get(
 router.put("/edit-subcategory/:id", authentication, editSubCategory);
 
 router.post(
-  "/add-item-under-subcategory",
+  "/add-item-under-subcategory/:categoryId/:subCategoryId",
   authentication,
   addItemUnderSubCategory
 );
-router.post("/add-item-under-category", authentication, addItemUnderCategory);
+router.post(
+  "/add-item-under-category/:categoryId",
+  authentication,
+  addItemUnderCategory
+);
 router.get("/get-all-items", authentication, getAllItems);
 router.get(
   "/get-items-under-category/:categoryId",
@@ -84,8 +88,8 @@ router.get(
   authentication,
   getItemsUnderSubCategory
 );
-router.get("/get-item/:id", authentication, getItemById);
-router.put("/edit-item/:id", authentication, editItem);
+router.get("/get-item/:itemId", authentication, getItemById);
+router.put("/edit-item/:itemId", authentication, editItem);
 router.post("/search-item", authentication, searchItemByName);
 
 export default router;

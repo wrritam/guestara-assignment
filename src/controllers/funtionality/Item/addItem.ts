@@ -28,7 +28,9 @@ export const addItemUnderSubCategory = async (
     taxApplicability,
     taxNumber,
   } = req.body;
+
   const subCategoryId = Number(req.params.subCategoryId);
+  const categoryId = Number(req.params.categoryId);
 
   const user = await prisma.user.findUnique({
     where: {
@@ -45,12 +47,12 @@ export const addItemUnderSubCategory = async (
           description: description,
           baseAmount: baseAmount,
           discount: discount,
+          categoryId: categoryId,
           subCategoryId: subCategoryId,
           taxApplicability: taxApplicability,
           taxNumber: taxNumber,
           totalAmount: Number(baseAmount - discount),
           addedById: user.id,
-          categoryId: 0,
         },
       });
 
@@ -102,7 +104,6 @@ export const addItemUnderCategory = async (
           taxNumber: taxNumber,
           totalAmount: Number(baseAmount - discount),
           addedById: user.id,
-          subCategoryId: 0,
         },
       });
 

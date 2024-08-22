@@ -53,7 +53,7 @@ export const editItem = async (req: CustomRequest, res: Response) => {
       });
 
       if (item) {
-        res.json({ item });
+        res.json({ message: "Item Updated", item });
       } else {
         res.status(404).json({ message: "No item found" });
       }
