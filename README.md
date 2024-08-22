@@ -6,6 +6,8 @@ Here's the live link - [Live deployed Link](https://guestara-assignment-8b02.onr
 
 Here's the Postman documentation - [Postman documentation](https://documenter.getpostman.com/view/21414570/2sAXjDfFrt)
 
+Here's the loom video link explaining all the operations - [Loom](https://www.loom.com/share/c71f6dc8989c4eddac7b9a4ae798209b?sid=84af5cd8-739e-4fd0-9f14-c39c19428644)
+
 
 ## Features
 
