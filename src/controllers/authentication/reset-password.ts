@@ -18,11 +18,7 @@ export const resetPassword = async (
       where: { email: email },
       data: {
         password: hashedPassword,
-        updatedAt: new Date().toLocaleTimeString("en-US", {
-          hour12: false,
-          hour: "numeric",
-          minute: "numeric",
-        }),
+        updatedAt: new Date().toISOString(),
       },
     });
     res.json({ message: "Password updated successfully" });

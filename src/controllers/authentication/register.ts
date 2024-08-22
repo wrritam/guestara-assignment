@@ -21,7 +21,7 @@ export const register = async (req: express.Request, res: express.Response) => {
         data: {
           name: name,
           otp: randomOTP,
-          createdAt: new Date().toLocaleDateString(),
+          createdAt: new Date().toISOString(),
         },
       });
       const content = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -87,7 +87,7 @@ export const register = async (req: express.Request, res: express.Response) => {
         password: hashedPassword,
         is_verified: false,
         otp: randomOTP,
-        createdAt: new Date().toLocaleDateString(),
+        createdAt: new Date().toISOString(),
       },
     });
     const content = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -127,7 +127,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     await sendMail(email, mailSubject, content);
     await prisma.user.update({
       where: { email: email },
-      data: { updatedAt: new Date().toLocaleDateString() },
+      data: { updatedAt: new Date().toISOString() },
     });
     const token = jwt.sign(
       { email: email, name: name },
