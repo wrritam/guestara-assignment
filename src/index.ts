@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/users", userRoutes);
 
-app.get("/", (req, res) => res.send("this is home page!"));
+app.get("/", (req, res) => res.send("Service is Live!"));
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
