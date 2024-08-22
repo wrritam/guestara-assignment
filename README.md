@@ -15,7 +15,7 @@ This repository contains the backend implementation for the Guestara assignment.
 - **Node.js**: JavaScript runtime for server-side programming.
 - **Express.js**: Web framework for Node.js to build APIs.
 - **TypeScript**: Superset of JavaScript providing static typing.
-- **Prisma**: ORM (Object-Relational Mapping) for database operations.
+- **Prisma**: ORM (Object-Relational Mapping) for database operations with AWS RDS postgres instance.
 - **Nodemon**: Tool for automatically restarting the server during development.
 
 ## Installation
