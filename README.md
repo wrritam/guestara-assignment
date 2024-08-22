@@ -2,7 +2,9 @@
 
 This repository contains the backend implementation for the Guestara assignment. The project is built with TypeScript and utilizes Prisma for database management. The main goal of this project is to demonstrate backend development skills, focusing on database interactions and RESTful API creation.
 
-Here's the live link - `https://guestara-assignment-8b02.onrender.com/`
+Here's the live link - [Live deployed Link](https://guestara-assignment-8b02.onrender.com/)
+
+Here's the Postman documentation - [Postman documentation](https://documenter.getpostman.com/view/21414570/2sAXjDfFrt)
 
 
 ## Features
